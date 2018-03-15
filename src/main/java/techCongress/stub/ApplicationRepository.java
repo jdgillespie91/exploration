@@ -16,6 +16,14 @@ public class ApplicationRepository implements AbstractApplicationRepository {
         datastore.save(application);
     }
 
+    public Application get() {
+        return datastore.find(Application.class).asList().get(0);
+    }
+
+    public void empty() {
+        datastore.delete(datastore.createQuery(Application.class));
+    }
+
     private static Datastore getDatastore() {
         final Morphia morphia = new Morphia();
         final MongoClient client = new MongoClient("localhost", 27017);

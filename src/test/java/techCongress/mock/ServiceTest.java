@@ -6,6 +6,7 @@ import org.mockito.ArgumentCaptor;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -34,6 +35,17 @@ public class ServiceTest {
 
         verify(applicationRepository).save(argumentCaptor.capture());
         assertThat(argumentCaptor.getValue(), instanceOf(Application.class));
+    }
+
+    @Test
+    public void createApplicationWithTypeCallsApplicationRepositorySaveWithTypedApplication() {
+        ArgumentCaptor<Application> argumentCaptor = ArgumentCaptor.forClass(Application.class);
+
+        service.createApplication("PGD");
+
+        verify(applicationRepository).save(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue(), instanceOf(Application.class));
+        assertThat(argumentCaptor.getValue().getType(), equalTo("PGD"));
     }
 
     @Test

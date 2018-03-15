@@ -16,4 +16,12 @@ class Service {
         Event event = new Event();
         eventRepository.save(event);
     }
+
+    public void createApplication(String type) {
+        Application application = new Application(type);
+        applicationRepository.save(application);
+
+        Event event = new Event();
+        eventRepository.save(event);
+    }
 }

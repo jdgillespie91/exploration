@@ -10,4 +10,8 @@ class Delegate {
     public void createApplication() {
         service.createApplication();
     }
+
+    public void createApplication(String type) {
+        service.createApplication(type);
+    }
 }

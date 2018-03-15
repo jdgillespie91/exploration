@@ -22,8 +22,14 @@ public class DelegateTest {
     }
 
     @Test
-    public void createApplicationCallsDelegate() {
+    public void createApplicationCallsService() {
         delegate.createApplication();
         verify(service).createApplication();
+    }
+
+    @Test
+    public void createApplicationWithTypeCallsServiceWithType() {
+        delegate.createApplication("PGD");
+        verify(service).createApplication("PGD");
     }
 }

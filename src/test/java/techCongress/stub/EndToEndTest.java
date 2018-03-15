@@ -8,6 +8,8 @@ import org.junit.rules.Timeout;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -28,10 +30,21 @@ public class EndToEndTest {
     }
 
     @Test
-    public void createApplicationCreatesApplicationDocument() {
+    public void createApplicationCreatesPGDApplicationDocument() {
         resource.createApplication();
 
-        assertThat(datastore.find(Application.class).asList().size(), equalTo(1));
+        List<Application> applications = datastore.find(Application.class).asList();
+        assertThat(applications.size(), equalTo(1));
+        assertThat(applications.get(0).getType(), equalTo("PGD"));
+    }
+
+    @Test
+    public void createPGMApplicationCreatesPGMApplicationDocument() {
+        resource.createApplication("PGM");
+
+        List<Application> applications = datastore.find(Application.class).asList();
+        assertThat(applications.size(), equalTo(1));
+        assertThat(applications.get(0).getType(), equalTo("PGM"));
     }
 
     @Test

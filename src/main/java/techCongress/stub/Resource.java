@@ -10,4 +10,8 @@ public class Resource {
     public void createApplication() {
         delegate.createApplication();
     }
+
+    public void createApplication(String type) {
+        delegate.createApplication(type);
+    }
 }

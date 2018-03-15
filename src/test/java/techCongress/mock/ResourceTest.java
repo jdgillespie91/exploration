@@ -26,4 +26,10 @@ public class ResourceTest {
         resource.createApplication();
         verify(delegate).createApplication();
     }
+
+    @Test
+    public void createApplicationWithTypeCallsDelegateWithType() {
+        resource.createApplication("PGD");
+        verify(delegate).createApplication("PGD");
+    }
 }
